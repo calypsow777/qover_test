@@ -1,0 +1,12 @@
+FRONTEND:
+    npx create-react-app front --template typescript
+    npm install node-sass
+    change .css files to .module.scss
+    delete testsetup.js and webstatsmachin.js files
+    remove eslintConfig in package.json
+    npm install eslint --save-dev
+    npx eslint --init
+    npm install eslint-import-resolver-typescript --save-dev
+    c/c .eslintrc.json
+    npm install @fontsource/roboto then put roboto first in index.css
+	

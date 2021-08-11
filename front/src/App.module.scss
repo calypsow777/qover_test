@@ -1,0 +1,34 @@
+
+@import "./styles/resets.scss";
+@import "./styles/variables.scss";
+
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginScreenBg {
+  background: linear-gradient(122deg, $bright-navy-bleu -6%, $maximum-blue-green);
+}
+
+.carFormScreenBg {
+  background-image: url('./images/code.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+}
+
+.pricePlansScreenBg {
+  background-color: $cultured-white;
+  background-image: url('./images/travelBackground.svg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-end;
+}

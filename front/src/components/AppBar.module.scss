@@ -1,0 +1,37 @@
+@import '../styles/variables';
+
+.appBarContainer {
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  font-size: 0.6rem;
+  background-color: rgba($dark-jungle-green, 0.2);
+}
+
+.qoverLinkAndIconContainer {
+  display: flex;
+  align-items: center;
+}
+
+.qoverLink {
+  color: $white;
+}
+
+.chevronLeftIcon {
+  color: $white;
+}
+
+@media (min-width: 600px) {
+  .appBarContainer {
+    padding-left: 4em;
+    padding-right: 4em;
+    font-size: 0.8rem;
+  }  
+}
+
+@media (min-width: 960px) {
+  .appBarContainer {
+    padding-left: 8em;
+    padding-right: 8em;
+  }  
+}
