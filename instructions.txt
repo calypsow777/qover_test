@@ -9,4 +9,17 @@ FRONTEND:
     npm install eslint-import-resolver-typescript --save-dev
     c/c .eslintrc.json
     npm install @fontsource/roboto then put roboto first in index.css
-	
+
+
+BACKEND:
+    nest new server --skip-git
+	npm install prisma --save-dev
+    npx prisma init
+    create user model
+    npx prisma migrate dev --name init
+    npm install @prisma/client
+    add tsconfigRootDir: __dirname, to parserOptions in .eslintrc.js
+    nest g service|module|controller users
+    npm i --save class-validator class-transformer
+    npm i bcrypt
+    npm i -D @types/bcrypt

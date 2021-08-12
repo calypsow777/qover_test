@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomValidationError.js","sourceRoot":"","sources":["../../../src/common/errors/CustomValidationError.ts"],"names":[],"mappings":";;;AAAA,MAAa,qBAAqB;IAIhC,YAAY,SAAiB,EAAE,YAAoB;QACjD,IAAI,CAAC,SAAS,GAAG,SAAS,CAAC;QAC3B,IAAI,CAAC,YAAY,GAAG,YAAY,CAAC;IACnC,CAAC;CACF;AARD,sDAQC"}
