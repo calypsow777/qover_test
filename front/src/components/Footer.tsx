@@ -4,7 +4,7 @@ import styles from './Footer.module.scss';
 
 function Footer() {
   // TODO: change color if current screen = pricePlans
-  const footerStyle = styles.footerContainerDark;
+  const footerStyle = styles.footerContainerLight;
   return (
     <div className={footerStyle}>
       © Qover 2021

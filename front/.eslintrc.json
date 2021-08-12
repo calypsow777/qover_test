@@ -39,7 +39,16 @@
                     ".tsx"
                 ]
             }
-        ]
+        ],
+        "max-len": [
+            2,
+            140,
+            4,
+            {
+                "ignoreUrls": true
+            }
+        ],
+        "no-underscore-dangle": "off"
     },
     "settings": {
         "import/resolver": {

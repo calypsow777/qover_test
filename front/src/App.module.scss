@@ -9,7 +9,7 @@
 }
 
 .loginScreenBg {
-  background: linear-gradient(122deg, $bright-navy-bleu -6%, $maximum-blue-green);
+  background: linear-gradient(122deg, $bright-navy-blue -6%, $maximum-blue-green);
 }
 
 .carFormScreenBg {
@@ -26,9 +26,6 @@
   background-size: 100% auto;
 }
 
-.footerContainer {
-  display: flex;
-  flex-direction: column;
+.contentContainer {
   flex: 1;
-  justify-content: flex-end;
 }
