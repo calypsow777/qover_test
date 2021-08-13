@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userWithoutPwdDto = exports.signupUserDto = void 0;
+exports.LoginUserDto = exports.UserWithoutPwdDto = exports.SignupUserDto = void 0;
 const class_validator_1 = require("class-validator");
 const CustomError_1 = require("../common/errors/CustomError");
-class signupUserDto {
+class SignupUserDto {
 }
 __decorate([
     class_validator_1.IsEmail({}, {
@@ -21,7 +21,7 @@ __decorate([
         },
     }),
     __metadata("design:type", String)
-], signupUserDto.prototype, "email", void 0);
+], SignupUserDto.prototype, "email", void 0);
 __decorate([
     class_validator_1.IsString({
         context: {
@@ -29,9 +29,32 @@ __decorate([
         },
     }),
     __metadata("design:type", String)
-], signupUserDto.prototype, "password", void 0);
-exports.signupUserDto = signupUserDto;
-class userWithoutPwdDto {
+], SignupUserDto.prototype, "password", void 0);
+exports.SignupUserDto = SignupUserDto;
+class UserWithoutPwdDto {
 }
-exports.userWithoutPwdDto = userWithoutPwdDto;
+exports.UserWithoutPwdDto = UserWithoutPwdDto;
+class LoginUserDto {
+}
+__decorate([
+    class_validator_1.IsEmail({}, {
+        context: {
+            customError: new CustomError_1.CustomError('users-4', 'The email must be valid.'),
+        },
+    }),
+    __metadata("design:type", String)
+], LoginUserDto.prototype, "email", void 0);
+__decorate([
+    class_validator_1.IsString({
+        context: {
+            customError: new CustomError_1.CustomError('users-5', 'The password must be a string.'),
+        },
+    }),
+    __metadata("design:type", String)
+], LoginUserDto.prototype, "password", void 0);
+__decorate([
+    class_validator_1.IsOptional(),
+    __metadata("design:type", Boolean)
+], LoginUserDto.prototype, "rememberMe", void 0);
+exports.LoginUserDto = LoginUserDto;
 //# sourceMappingURL=dtos.js.map

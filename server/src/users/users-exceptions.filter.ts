@@ -1,11 +1,7 @@
-import {
-  Catch,
-  ArgumentsHost,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Catch, ArgumentsHost, HttpStatus } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { CustomError } from 'src/common/errors/CustomError';
+import { CustomHttpException } from 'src/common/errors/CustomHttpException';
 import { CustomPrismaClientKnownRequestError } from 'src/common/errors/PrismaErrors';
 import { AllExceptionsFilter } from 'src/common/exception-filters/all-exceptions.filter';
 
@@ -18,23 +14,19 @@ export class UsersExceptionsFilter extends AllExceptionsFilter {
         const customE = new CustomPrismaClientKnownRequestError(e);
         // email is already taken
         if (customE.meta?.target?.includes('email')) {
-          super.catch(
-            new HttpException(
-              {
-                statusCode: HttpStatus.BAD_REQUEST,
-                message: 'The validation failed.',
-                customErrors: [
-                  new CustomError(
-                    'users-3',
-                    'The email is already present in the database.',
-                  ),
-                ],
-              },
+          return super.catch(
+            new CustomHttpException(
               HttpStatus.BAD_REQUEST,
+              'The validation failed.',
+              [
+                new CustomError(
+                  'users-3',
+                  'The email is already present in the database.',
+                ),
+              ],
             ),
             host,
           );
-          return;
         }
       }
     }

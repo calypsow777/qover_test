@@ -18,6 +18,7 @@ UsersModule = __decorate([
         providers: [users_service_1.UsersService],
         controllers: [users_controller_1.UsersController],
         imports: [prisma_module_1.PrismaModule],
+        exports: [users_service_1.UsersService],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;

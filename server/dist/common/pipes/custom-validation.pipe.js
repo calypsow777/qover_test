@@ -10,6 +10,7 @@ exports.CustomValidationPipe = void 0;
 const common_1 = require("@nestjs/common");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const CustomHttpException_1 = require("../errors/CustomHttpException");
 let CustomValidationPipe = class CustomValidationPipe {
     async transform(value, { metatype }) {
         if (!metatype || !this.toValidate(metatype)) {
@@ -25,11 +26,7 @@ let CustomValidationPipe = class CustomValidationPipe {
                     resErrors.push(contexts[contextKey].customError);
                 }
             }
-            throw new common_1.HttpException({
-                statusCode: common_1.HttpStatus.BAD_REQUEST,
-                message: 'The validation failed.',
-                customErrors: resErrors,
-            }, common_1.HttpStatus.BAD_REQUEST);
+            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.BAD_REQUEST, 'The validation failed.', resErrors);
         }
         return value;
     }

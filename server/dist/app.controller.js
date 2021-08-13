@@ -8,27 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
+const local_auth_guard_1 = require("./auth/local-auth-guard");
+const auth_service_1 = require("./auth/auth.service");
+const dtos_1 = require("./users/dtos");
+const public_route_decorator_1 = require("./common/decorators/public-route.decorator");
 let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+    constructor(authService) {
+        this.authService = authService;
     }
-    getHello() {
-        return this.appService.getHello();
+    async login(loginData, req) {
+        return this.authService.login(req.user, loginData.rememberMe);
     }
 };
 __decorate([
-    common_1.Get(),
+    public_route_decorator_1.Public(),
+    common_1.HttpCode(200),
+    common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
+    common_1.Post('auth/login'),
+    __param(0, common_1.Body()),
+    __param(1, common_1.Request()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
+    __metadata("design:paramtypes", [dtos_1.LoginUserDto, Object]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "login", null);
 AppController = __decorate([
     common_1.Controller(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AppController);
 exports.AppController = AppController;
 //# sourceMappingURL=app.controller.js.map

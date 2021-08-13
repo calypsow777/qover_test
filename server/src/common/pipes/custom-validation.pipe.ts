@@ -3,11 +3,11 @@ import {
   Injectable,
   ArgumentMetadata,
   HttpStatus,
-  HttpException,
 } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { CustomError } from '../errors/CustomError';
+import { CustomHttpException } from '../errors/CustomHttpException';
 
 @Injectable()
 export class CustomValidationPipe implements PipeTransform<any> {
@@ -26,13 +26,10 @@ export class CustomValidationPipe implements PipeTransform<any> {
           resErrors.push(contexts[contextKey].customError);
         }
       }
-      throw new HttpException(
-        {
-          statusCode: HttpStatus.BAD_REQUEST,
-          message: 'The validation failed.',
-          customErrors: resErrors,
-        },
+      throw new CustomHttpException(
         HttpStatus.BAD_REQUEST,
+        'The validation failed.',
+        resErrors,
       );
     }
     return value;

@@ -24,6 +24,13 @@ let UsersService = class UsersService {
             data: Object.assign(Object.assign({}, data), { password: hashedPassword }),
         });
     }
+    async findOneByEmail(email) {
+        return this.prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+    }
 };
 UsersService = __decorate([
     common_1.Injectable(),

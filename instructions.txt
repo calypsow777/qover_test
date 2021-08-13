@@ -23,3 +23,9 @@ BACKEND:
     npm i --save class-validator class-transformer
     npm i bcrypt
     npm i -D @types/bcrypt
+    npm install --save @nestjs/passport passport passport-local
+    npm install --save-dev @types/passport-local
+    nest g module auth
+    nest g service auth
+    npm install --save @nestjs/jwt passport-jwt
+    npm install --save-dev @types/passport-jwt

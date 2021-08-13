@@ -1,7 +1,7 @@
 import { UsersService } from '../users/users.service';
-import { signupUserDto, userWithoutPwdDto } from './dtos';
+import { SignupUserDto, UserWithoutPwdDto } from './dtos';
 export declare class UsersController {
     private readonly userService;
     constructor(userService: UsersService);
-    signupUser(userData: signupUserDto): Promise<userWithoutPwdDto>;
+    signupUser(userData: SignupUserDto): Promise<UserWithoutPwdDto>;
 }

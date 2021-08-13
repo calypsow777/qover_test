@@ -15,11 +15,13 @@ const prisma_module_1 = require("./prisma/prisma.module");
 const users_module_1 = require("./users/users.module");
 const custom_validation_pipe_1 = require("./common/pipes/custom-validation.pipe");
 const all_exceptions_filter_1 = require("./common/exception-filters/all-exceptions.filter");
+const auth_module_1 = require("./auth/auth.module");
+const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
@@ -30,6 +32,10 @@ AppModule = __decorate([
             {
                 provide: core_1.APP_FILTER,
                 useClass: all_exceptions_filter_1.AllExceptionsFilter,
+            },
+            {
+                provide: core_1.APP_GUARD,
+                useClass: jwt_auth_guard_1.JwtAuthGuard,
             },
         ],
     })
