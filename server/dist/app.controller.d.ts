@@ -1,9 +1,9 @@
 import { AuthService } from './auth/auth.service';
-import { LoginUserDto } from './users/dtos';
+import { LoginDto, LoginResponseDto } from './auth/dtos';
+import { UserWithoutPwdDto } from './users/dtos';
 export declare class AppController {
     private authService;
     constructor(authService: AuthService);
-    login(loginData: LoginUserDto, req: any): Promise<{
-        access_token: string;
-    }>;
+    login(loginData: LoginDto, req: any): Promise<LoginResponseDto>;
+    verify(req: any): UserWithoutPwdDto;
 }

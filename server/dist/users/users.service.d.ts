@@ -4,5 +4,5 @@ export declare class UsersService {
     private prisma;
     constructor(prisma: PrismaService);
     createUser(data: Prisma.UserCreateInput): Promise<User>;
-    findOneByEmail(email: string): Promise<User | undefined>;
+    findUnique(data: Prisma.UserFindUniqueArgs): Promise<User | undefined>;
 }

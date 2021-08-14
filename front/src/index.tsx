@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
 import { createTheme, ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import App from './App';
+import store from './store';
 
 const theme = createTheme({
   palette: {
@@ -17,11 +19,13 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <StylesProvider injectFirst>
-        <App />
-      </StylesProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <StylesProvider injectFirst>
+          <App />
+        </StylesProvider>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

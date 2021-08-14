@@ -32,7 +32,7 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async validateUser(email, password) {
-        const user = await this.usersService.findOneByEmail(email);
+        const user = await this.usersService.findUnique({ where: { email } });
         if (user) {
             const pwdIsValid = await bcrypt.compare(password, user.password);
             if (pwdIsValid) {
@@ -46,7 +46,8 @@ let AuthService = class AuthService {
         const payload = { email: user.email, sub: user.id };
         const options = rememberMe ? { expiresIn: '7d' } : {};
         return {
-            access_token: this.jwtService.sign(payload, options),
+            accessToken: this.jwtService.sign(payload, options),
+            user,
         };
     }
 };

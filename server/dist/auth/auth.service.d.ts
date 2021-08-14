@@ -7,6 +7,7 @@ export declare class AuthService {
     constructor(usersService: UsersService, jwtService: JwtService);
     validateUser(email: string, password: string): Promise<any>;
     login(user: UserWithoutPwdDto, rememberMe?: boolean): Promise<{
-        access_token: string;
+        accessToken: string;
+        user: UserWithoutPwdDto;
     }>;
 }

@@ -35,8 +35,8 @@ export class CustomValidationPipe implements PipeTransform<any> {
     return value;
   }
 
-  private toValidate(metatype: Function): boolean {
-    const types: Function[] = [String, Boolean, Number, Array, Object];
+  private toValidate(metatype: Function): boolean { // eslint-disable-line
+    const types: Function[] = [String, Boolean, Number, Array, Object]; // eslint-disable-line
     return !types.includes(metatype);
   }
 }

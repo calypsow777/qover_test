@@ -9,6 +9,9 @@ FRONTEND:
     npm install eslint-import-resolver-typescript --save-dev
     c/c .eslintrc.json
     npm install @fontsource/roboto then put roboto first in index.css
+    npm install react-redux
+    npm i redux
+    npm i immer
 
 
 BACKEND:

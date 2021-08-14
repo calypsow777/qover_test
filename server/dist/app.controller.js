@@ -16,7 +16,7 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("./auth/local-auth-guard");
 const auth_service_1 = require("./auth/auth.service");
-const dtos_1 = require("./users/dtos");
+const dtos_1 = require("./auth/dtos");
 const public_route_decorator_1 = require("./common/decorators/public-route.decorator");
 let AppController = class AppController {
     constructor(authService) {
@@ -24,6 +24,9 @@ let AppController = class AppController {
     }
     async login(loginData, req) {
         return this.authService.login(req.user, loginData.rememberMe);
+    }
+    verify(req) {
+        return req.user;
     }
 };
 __decorate([
@@ -34,9 +37,16 @@ __decorate([
     __param(0, common_1.Body()),
     __param(1, common_1.Request()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dtos_1.LoginUserDto, Object]),
+    __metadata("design:paramtypes", [dtos_1.LoginDto, Object]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "login", null);
+__decorate([
+    common_1.Get('auth/verify'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Object)
+], AppController.prototype, "verify", null);
 AppController = __decorate([
     common_1.Controller(),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

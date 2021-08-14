@@ -9,26 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SignupUserDto = void 0;
+exports.LoginDto = void 0;
 const class_validator_1 = require("class-validator");
 const CustomError_1 = require("../common/errors/CustomError");
-class SignupUserDto {
+const dtos_1 = require("../users/dtos");
+class LoginDto {
 }
 __decorate([
     class_validator_1.IsEmail({}, {
         context: {
-            customError: new CustomError_1.CustomError('users-1', 'The email must be valid.'),
+            customError: new CustomError_1.CustomError('auth-1', 'The email must be valid.'),
         },
     }),
     __metadata("design:type", String)
-], SignupUserDto.prototype, "email", void 0);
+], LoginDto.prototype, "email", void 0);
 __decorate([
     class_validator_1.IsString({
         context: {
-            customError: new CustomError_1.CustomError('users-2', 'The password must be a string.'),
+            customError: new CustomError_1.CustomError('auth-2', 'The password must be a string.'),
         },
     }),
     __metadata("design:type", String)
-], SignupUserDto.prototype, "password", void 0);
-exports.SignupUserDto = SignupUserDto;
+], LoginDto.prototype, "password", void 0);
+__decorate([
+    class_validator_1.IsOptional(),
+    __metadata("design:type", Boolean)
+], LoginDto.prototype, "rememberMe", void 0);
+exports.LoginDto = LoginDto;
 //# sourceMappingURL=dtos.js.map
