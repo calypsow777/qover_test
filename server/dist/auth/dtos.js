@@ -16,7 +16,7 @@ const dtos_1 = require("../users/dtos");
 class LoginDto {
 }
 __decorate([
-    class_validator_1.IsEmail({}, {
+    class_validator_1.IsString({
         context: {
             customError: new CustomError_1.CustomError('auth-1', 'The email must be valid.'),
         },

@@ -14,8 +14,16 @@ export function auth(state: State = {
 }, action: ActionParam) {
   switch (action.type) {
     case 'USER_LOGGED_IN': {
+      localStorage.setItem('accessToken', action.accessToken!);
       return produce(state, (draft) => {
         draft.accessToken = action.accessToken;
+      });
+    }
+
+    case 'USER_LOGGED_OUT': {
+      localStorage.removeItem('accessToken');
+      return produce(state, (draft) => {
+        draft.accessToken = undefined;
       });
     }
 

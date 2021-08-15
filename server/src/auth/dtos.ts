@@ -1,17 +1,15 @@
-import { IsString, IsEmail, IsOptional } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 import { CustomError } from 'src/common/errors/CustomError';
 import { UserWithoutPwdDto } from 'src/users/dtos';
 
 export class LoginDto {
-  @IsEmail(
-    {},
-    {
-      context: {
-        customError: new CustomError('auth-1', 'The email must be valid.'),
-      },
+  // We use IsString instead of IsEmail because we were asked to provide a "Qover" login for the reviewers.
+  @IsString({
+    context: {
+      customError: new CustomError('auth-1', 'The email must be valid.'),
     },
-  )
+  })
   email: string;
 
   @IsString({

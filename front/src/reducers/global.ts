@@ -14,6 +14,19 @@ export function global(state: State = {
   currentScreen: '',
 }, action: ActionParam) {
   switch (action.type) {
+    case 'USER_LOGGED_IN': {
+      return produce(state, (draft) => {
+        draft.currentScreen = 'carForm';
+      });
+    }
+
+    case 'USER_LOGGED_OUT': {
+      localStorage.removeItem('accessToken');
+      return produce(state, (draft) => {
+        draft.currentScreen = 'login';
+      });
+    }
+
     case 'TOKEN_VERIFIED': {
       return produce(state, (draft) => {
         draft.currentScreen = 'carForm';

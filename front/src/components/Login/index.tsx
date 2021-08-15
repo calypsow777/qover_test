@@ -24,7 +24,7 @@ function Login() {
 
   return (
     <div className={styles.indexContainer}>
-      <img src={QoverLogo} alt="Qover logo" />
+      <img src={QoverLogo} className={styles.qoverLogo} alt="Qover logo" />
       <Box mt="2em">
         <LoginForm />
         <Box mt="1.2em">
@@ -36,7 +36,6 @@ function Login() {
               </p>
             </Button>
           </ThemeProvider>
-
         </Box>
       </Box>
 

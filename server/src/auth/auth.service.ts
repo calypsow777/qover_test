@@ -17,10 +17,11 @@ export class AuthService {
       const pwdIsValid = await bcrypt.compare(password, user.password);
       if (pwdIsValid) {
         const { password, ...result } = user;
-        return result;
+        return { user: result, pwdIsWrong: false };
       }
+      return { user, pwdIsWrong: true };
     }
-    return null;
+    return { user: null };
   }
 
   async login(user: UserWithoutPwdDto, rememberMe = false) {

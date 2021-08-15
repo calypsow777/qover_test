@@ -14,15 +14,20 @@ const passport_local_1 = require("passport-local");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
+const CustomHttpException_1 = require("../common/errors/CustomHttpException");
+const CustomError_1 = require("../common/errors/CustomError");
 let LocalStrategy = class LocalStrategy extends passport_1.PassportStrategy(passport_local_1.Strategy) {
     constructor(authService) {
         super({ usernameField: 'email' });
         this.authService = authService;
     }
     async validate(email, password) {
-        const user = await this.authService.validateUser(email, password);
+        const { user, pwdIsWrong } = await this.authService.validateUser(email, password);
         if (!user) {
-            throw new common_1.UnauthorizedException();
+            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.UNAUTHORIZED, 'The validation failed.', [new CustomError_1.CustomError('auth-3', 'This email is not registered yet.')]);
+        }
+        if (pwdIsWrong) {
+            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.UNAUTHORIZED, 'The validation failed.', [new CustomError_1.CustomError('auth-4', 'The password is incorrect.')]);
         }
         return user;
     }

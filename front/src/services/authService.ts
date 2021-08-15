@@ -5,14 +5,11 @@ import { UserWithoutPwdDto } from '../common/users';
 export interface LoginParams {
   email: string,
   password: string,
+  rememberMe: boolean,
 }
 
-export function login({ email, password } : LoginParams) : Promise<LoginResponse> {
+export function login(body : LoginParams) : Promise<LoginResponse> {
   const url = 'auth/login';
-  const body = {
-    email,
-    password,
-  };
 
   return request({ url, method: 'POST', body });
 }

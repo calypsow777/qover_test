@@ -2,32 +2,35 @@
 
 .appBarContainer {
   padding: 1em;
-  padding-left: 2em;
-  padding-right: 2em;
-  font-size: 0.6rem;
+  padding-left: 1em;
+  padding-right: 1em;
   background-color: rgba($dark-jungle-green, 0.2);
 }
 
-.qoverLinkAndIconContainer {
+.navItemsContainer {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  color: $white;
+}
+
+.chevronLeftIcon {
+  margin-right: -0.4em;
 }
 
 .qoverLink {
   color: $white;
   text-decoration: none;
-}
-
-.chevronLeftIcon {
-  color: $white;
+  margin: 0;
+  display: inline-block;
 }
 
 @media (min-width: 600px) {
   .appBarContainer {
     padding-left: 4em;
     padding-right: 4em;
-    font-size: 0.8rem;
-  }  
+  }
 }
 
 @media (min-width: 960px) {

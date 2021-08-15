@@ -20,6 +20,12 @@ export function users(state: State = {
       });
     }
 
+    case 'USER_LOGGED_OUT': {
+      return produce(state, (draft) => {
+        draft.user = undefined;
+      });
+    }
+
     case 'TOKEN_VERIFIED': {
       return produce(state, (draft) => {
         draft.user = action.user;

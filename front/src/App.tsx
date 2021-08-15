@@ -16,6 +16,7 @@ function App() {
 
   const currentScreen = useSelector((state: RootState) => state.global.currentScreen);
   const background = currentScreen === 'pricePlans' ? styles.pricePlansScreenBg : styles.loginScreenBg;
+  const imgBackground = currentScreen === 'carForm' ? styles.carFormScreenImgBg : {};
 
   function handleOnVerifySuccess() {
     setWaiting(false);
@@ -55,7 +56,7 @@ function App() {
   return (
     <div className={`${styles.appContainer} ${background}`}>
       <AppBar />
-      <div className={styles.contentContainer}>
+      <div className={`${styles.contentContainer} ${imgBackground}`}>
         {renderContent()}
       </div>
       <SnackbarsManager />

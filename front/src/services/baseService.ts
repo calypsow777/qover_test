@@ -13,6 +13,7 @@ export async function request({ url, method = 'GET', body }: RequestParams) {
 
   const headers = {
     'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
     Authorization: accessToken ? `Bearer ${accessToken}` : '',
   };
 
@@ -44,7 +45,7 @@ export async function request({ url, method = 'GET', body }: RequestParams) {
 
     // the fetch failed; cannot reach the server
   } catch (error) {
-    if (error.name !== 'CustomHttError') throw new CustomHttpError({ status: 503, couldReachServer: false });
+    if (error.name !== 'CustomHttpError') throw new CustomHttpError({ status: 503, couldReachServer: false });
     else throw error;
   }
 }

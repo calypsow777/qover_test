@@ -37,10 +37,11 @@ let AuthService = class AuthService {
             const pwdIsValid = await bcrypt.compare(password, user.password);
             if (pwdIsValid) {
                 const { password } = user, result = __rest(user, ["password"]);
-                return result;
+                return { user: result, pwdIsWrong: false };
             }
+            return { user, pwdIsWrong: true };
         }
-        return null;
+        return { user: null };
     }
     async login(user, rememberMe = false) {
         const payload = { email: user.email, sub: user.id };
