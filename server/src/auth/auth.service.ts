@@ -16,7 +16,7 @@ export class AuthService {
     if (user) {
       const pwdIsValid = await bcrypt.compare(password, user.password);
       if (pwdIsValid) {
-        const { password, ...result } = user;
+        const { password, ...result } = user; // eslint-disable-line
         return { user: result, pwdIsWrong: false };
       }
       return { user, pwdIsWrong: true };

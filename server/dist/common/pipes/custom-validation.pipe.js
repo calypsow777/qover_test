@@ -17,7 +17,7 @@ let CustomValidationPipe = class CustomValidationPipe {
             return value;
         }
         const object = class_transformer_1.plainToClass(metatype, value);
-        const errors = await class_validator_1.validate(object);
+        const errors = await class_validator_1.validate(object, { stopAtFirstError: true });
         if (errors.length > 0) {
             const resErrors = [];
             for (const error of errors) {
@@ -26,7 +26,9 @@ let CustomValidationPipe = class CustomValidationPipe {
                     resErrors.push(contexts[contextKey].customError);
                 }
             }
-            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.BAD_REQUEST, 'The validation failed.', resErrors);
+            throw new CustomHttpException_1.CustomHttpException({
+                customErrors: resErrors,
+            });
         }
         return value;
     }

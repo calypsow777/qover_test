@@ -17,11 +17,12 @@ const custom_validation_pipe_1 = require("./common/pipes/custom-validation.pipe"
 const all_exceptions_filter_1 = require("./common/exception-filters/all-exceptions.filter");
 const auth_module_1 = require("./auth/auth.module");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
+const prices_module_1 = require("./prices/prices.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, auth_module_1.AuthModule, prices_module_1.PricesModule],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,

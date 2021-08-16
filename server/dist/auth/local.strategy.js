@@ -24,10 +24,16 @@ let LocalStrategy = class LocalStrategy extends passport_1.PassportStrategy(pass
     async validate(email, password) {
         const { user, pwdIsWrong } = await this.authService.validateUser(email, password);
         if (!user) {
-            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.UNAUTHORIZED, 'The validation failed.', [new CustomError_1.CustomError('auth-3', 'This email is not registered yet.')]);
+            throw new CustomHttpException_1.CustomHttpException({
+                customErrors: [
+                    new CustomError_1.CustomError('auth-3', 'This email is not registered yet.'),
+                ],
+            });
         }
         if (pwdIsWrong) {
-            throw new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.UNAUTHORIZED, 'The validation failed.', [new CustomError_1.CustomError('auth-4', 'The password is incorrect.')]);
+            throw new CustomHttpException_1.CustomHttpException({
+                customErrors: [new CustomError_1.CustomError('auth-4', 'The password is incorrect.')],
+            });
         }
         return user;
     }

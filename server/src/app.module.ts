@@ -8,9 +8,10 @@ import { CustomValidationPipe } from './common/pipes/custom-validation.pipe';
 import { AllExceptionsFilter } from './common/exception-filters/all-exceptions.filter';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { PricesModule } from './prices/prices.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, AuthModule],
+  imports: [PrismaModule, UsersModule, AuthModule, PricesModule],
   controllers: [AppController],
   providers: [
     AppService,

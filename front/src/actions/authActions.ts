@@ -1,14 +1,10 @@
-import {
-  login as loginService,
-  verify as verifyService,
-  LoginParams as LoginServiceParams,
-} from '../services/authService';
+import * as service from '../services/authService';
 import { ActionCallbacks } from './interfaces';
 import store from '../store';
 import { CustomHttpError } from '../common/CustomHttpError';
 
 interface LoginParams {
-  fields: LoginServiceParams,
+  fields: service.LoginParams,
   callbacks?: ActionCallbacks,
 }
 
@@ -22,7 +18,7 @@ interface VerifyParams {
 
 export async function login({ fields, callbacks }: LoginParams) {
   try {
-    const { user, accessToken } = await loginService(fields);
+    const { user, accessToken } = await service.login(fields);
 
     store.dispatch({
       type: 'USER_LOGGED_IN',
@@ -50,7 +46,7 @@ export async function logout({ callbacks }: LogoutParams = {}) {
 
 export async function verify({ callbacks }: VerifyParams) {
   try {
-    const user = await verifyService();
+    const user = await service.verify();
 
     store.dispatch({
       type: 'TOKEN_VERIFIED',

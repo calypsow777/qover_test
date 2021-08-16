@@ -21,16 +21,18 @@ function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
-  function handleOnEmailChange(event: SyntheticEvent) {
-    setEmail((event.target as HTMLInputElement).value);
+  function handleOnEmailChange(e: SyntheticEvent) {
+    if (emailHelperText) setEmailHelperText('');
+    setEmail((e.target as HTMLInputElement).value);
   }
 
-  function handleOnPasswordChange(event: SyntheticEvent) {
-    setPassword((event.target as HTMLInputElement).value);
+  function handleOnPasswordChange(e: SyntheticEvent) {
+    if (passwordHelperText) setPasswordHelperText('');
+    setPassword((e.target as HTMLInputElement).value);
   }
 
-  function handleOnRememberMeChange(event: SyntheticEvent) {
-    setRememberMe((event.target as HTMLInputElement).checked);
+  function handleOnRememberMeChange(e: SyntheticEvent) {
+    setRememberMe((e.target as HTMLInputElement).checked);
   }
 
   function handleOnSignInFinish() {
@@ -42,9 +44,7 @@ function LoginForm() {
 
     if (customErrors.length) {
       customErrors.forEach((e) => {
-        if (e.errorCode === 'auth-1') setEmailHelperText(e.frontMessage);
-        else if (e.errorCode === 'auth-2') setPasswordHelperText(e.frontMessage);
-        else if (e.errorCode === 'auth-3') setEmailHelperText(e.frontMessage);
+        if (e.errorCode === 'auth-3') setEmailHelperText(e.frontMessage);
         else if (e.errorCode === 'auth-4') setPasswordHelperText(e.frontMessage);
       });
     } else {
@@ -58,8 +58,6 @@ function LoginForm() {
   }
 
   function handleOnSignInSubmit(e: SyntheticEvent) {
-    // TODO: For simplicity we don't check the form values before sending the request.
-    // In a real environment we should also perform a check on the client side.
     e.preventDefault();
     clearErrors();
 

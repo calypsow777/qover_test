@@ -16,6 +16,7 @@
     "@types/prop-types": "^15.7.4",
     "@types/react": "^17.0.18",
     "@types/react-dom": "^17.0.9",
+    "class-validator": "^0.13.1",
     "immer": "^9.0.5",
     "json2mq": "^0.2.0",
     "node-sass": "^6.0.1",

@@ -20,9 +20,11 @@ let UsersExceptionsFilter = class UsersExceptionsFilter extends all_exceptions_f
             if (e.code === 'P2002') {
                 const customE = new PrismaErrors_1.CustomPrismaClientKnownRequestError(e);
                 if ((_b = (_a = customE.meta) === null || _a === void 0 ? void 0 : _a.target) === null || _b === void 0 ? void 0 : _b.includes('email')) {
-                    return super.catch(new CustomHttpException_1.CustomHttpException(common_1.HttpStatus.BAD_REQUEST, 'The validation failed.', [
-                        new CustomError_1.CustomError('users-3', 'The email is already present in the database.'),
-                    ]), host);
+                    return super.catch(new CustomHttpException_1.CustomHttpException({
+                        customErrors: [
+                            new CustomError_1.CustomError('users-3', 'The email is already present in the database.'),
+                        ],
+                    }), host);
                 }
             }
         }

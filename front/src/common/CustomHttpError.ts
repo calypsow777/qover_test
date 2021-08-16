@@ -8,6 +8,7 @@ interface ConstructorParams {
   couldReachServer?: boolean,
   customErrors?: CustomError[],
   defaultMsg?: string,
+  tokenHasExpired?: boolean
 }
 
 export class CustomHttpError extends Error {
@@ -23,8 +24,10 @@ export class CustomHttpError extends Error {
 
   frontMsg: string;
 
+  tokenHasExpired: boolean;
+
   constructor({
-    status, couldReachServer = true, customErrors = [], defaultMsg = 'An error occurred.',
+    status, couldReachServer = true, customErrors = [], defaultMsg = 'An error occurred.', tokenHasExpired = false,
   }: ConstructorParams) {
     super();
     this.status = status;
@@ -32,6 +35,7 @@ export class CustomHttpError extends Error {
     this.customErrors = customErrors;
     this.defaultMsg = defaultMsg;
     this.frontMsg = customErrors.reduce((acc, current) => acc.concat('\n').concat(current.frontMessage), '');
+    this.tokenHasExpired = tokenHasExpired;
     this.name = 'CustomHttpError';
   }
 }

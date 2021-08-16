@@ -23,11 +23,16 @@ export function addWaitingForServerToQueue() {
 }
 
 export function addRequestErrorToQueue(error: CustomHttpError) {
+  let msg = 'Your access has expired.';
+  if (!error.tokenHasExpired) {
+    msg = error.frontMsg || error.defaultMsg;
+  }
+
   store.dispatch({
     type: 'ADD_SNACKBAR_TO_QUEUE',
     snackbar: new Snackbar({
       severity: 'error',
-      msg: error.frontMsg || error.defaultMsg,
+      msg,
       duration: 5000,
       canBeDumped: false,
       showClose: true,

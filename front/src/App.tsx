@@ -6,6 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from './components/AppBar';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import CarForm from './components/CarForm';
 import SnackbarsManager from './components/SnackbarsManager';
 import styles from './App.module.scss';
 import { RootState } from './store';
@@ -47,6 +48,12 @@ function App() {
     if (currentScreen === 'login') {
       return (
         <Login />
+      );
+    }
+
+    if (currentScreen === 'carForm') {
+      return (
+        <CarForm />
       );
     }
 

@@ -23,7 +23,7 @@ function Login() {
   }
 
   return (
-    <div className={styles.indexContainer}>
+    <div className={styles.loginContainer}>
       <img src={QoverLogo} className={styles.qoverLogo} alt="Qover logo" />
       <Box mt="2em">
         <LoginForm />

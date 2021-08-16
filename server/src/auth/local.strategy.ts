@@ -1,6 +1,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CustomHttpException } from 'src/common/errors/CustomHttpException';
 import { CustomError } from 'src/common/errors/CustomError';
@@ -18,19 +18,17 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     );
 
     if (!user) {
-      throw new CustomHttpException(
-        HttpStatus.UNAUTHORIZED,
-        'The validation failed.',
-        [new CustomError('auth-3', 'This email is not registered yet.')],
-      );
+      throw new CustomHttpException({
+        customErrors: [
+          new CustomError('auth-3', 'This email is not registered yet.'),
+        ],
+      });
     }
 
     if (pwdIsWrong) {
-      throw new CustomHttpException(
-        HttpStatus.UNAUTHORIZED,
-        'The validation failed.',
-        [new CustomError('auth-4', 'The password is incorrect.')],
-      );
+      throw new CustomHttpException({
+        customErrors: [new CustomError('auth-4', 'The password is incorrect.')],
+      });
     }
 
     return user;

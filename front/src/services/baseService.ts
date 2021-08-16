@@ -24,6 +24,13 @@ export async function request({ url, method = 'GET', body }: RequestParams) {
       body: body ? JSON.stringify(body) : null,
     });
 
+    if (response.status === 401) {
+      store.dispatch({
+        type: 'TOKEN_NOT_VERIFIED',
+      });
+      throw new CustomHttpError({ status: 401, tokenHasExpired: true });
+    }
+
     if (response.status >= 400) {
       try {
         const data = await response.json();

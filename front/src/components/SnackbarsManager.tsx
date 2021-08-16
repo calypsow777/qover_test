@@ -66,7 +66,9 @@ function SnackbarsManager() {
         open={open}
         autoHideDuration={snackbars[0].duration}
         onClose={handleOnClose}
-        onExited={handleOnExited}
+        TransitionProps={{
+          onExited: handleOnExited,
+        }}
       >
         <Alert
           onClose={snackbars[0]?.showClose ? handleOnCloseClick : undefined}
