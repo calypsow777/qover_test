@@ -4,6 +4,7 @@ import { PricesService } from './prices.service';
 import { CustomError } from '../common/errors/CustomError';
 import { CustomHttpException } from '../common/errors/CustomHttpException';
 import { GetPricesDto } from './dtos';
+import { throwExceptionFromValidationErrors } from 'src/common/utils';
 
 @Injectable()
 export class GetPricesPipe implements PipeTransform {
@@ -25,18 +26,7 @@ export class GetPricesPipe implements PipeTransform {
       },
     );
 
-    if (errors.length > 0) {
-      const resErrors: CustomError[] = [];
-      for (const error of errors) {
-        const contexts = error.contexts;
-        for (const contextKey in contexts) {
-          resErrors.push(contexts[contextKey].customError);
-        }
-      }
-      throw new CustomHttpException({
-        customErrors: resErrors,
-      });
-    }
+    if (errors.length > 0) throwExceptionFromValidationErrors(errors);
 
     if (numDriverAge < 25 && carMake === 'Porsche') {
       throw new CustomHttpException({

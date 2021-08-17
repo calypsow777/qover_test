@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SignupUserDto = void 0;
+exports.SignupDto = void 0;
 const class_validator_1 = require("class-validator");
 const CustomError_1 = require("../common/errors/CustomError");
-class SignupUserDto {
+class SignupDto {
 }
 __decorate([
     class_validator_1.IsEmail({}, {
@@ -21,7 +21,7 @@ __decorate([
         },
     }),
     __metadata("design:type", String)
-], SignupUserDto.prototype, "email", void 0);
+], SignupDto.prototype, "email", void 0);
 __decorate([
     class_validator_1.IsString({
         context: {
@@ -29,6 +29,6 @@ __decorate([
         },
     }),
     __metadata("design:type", String)
-], SignupUserDto.prototype, "password", void 0);
-exports.SignupUserDto = SignupUserDto;
+], SignupDto.prototype, "password", void 0);
+exports.SignupDto = SignupDto;
 //# sourceMappingURL=dtos.js.map

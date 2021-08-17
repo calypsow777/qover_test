@@ -10,7 +10,7 @@ exports.CustomValidationPipe = void 0;
 const common_1 = require("@nestjs/common");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const CustomHttpException_1 = require("../errors/CustomHttpException");
+const utils_1 = require("../../common/utils");
 let CustomValidationPipe = class CustomValidationPipe {
     async transform(value, { metatype }) {
         if (!metatype || !this.toValidate(metatype)) {
@@ -18,18 +18,8 @@ let CustomValidationPipe = class CustomValidationPipe {
         }
         const object = class_transformer_1.plainToClass(metatype, value);
         const errors = await class_validator_1.validate(object, { stopAtFirstError: true });
-        if (errors.length > 0) {
-            const resErrors = [];
-            for (const error of errors) {
-                const contexts = error.contexts;
-                for (const contextKey in contexts) {
-                    resErrors.push(contexts[contextKey].customError);
-                }
-            }
-            throw new CustomHttpException_1.CustomHttpException({
-                customErrors: resErrors,
-            });
-        }
+        if (errors.length > 0)
+            utils_1.throwExceptionFromValidationErrors(errors);
         return value;
     }
     toValidate(metatype) {

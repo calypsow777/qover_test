@@ -1,0 +1,90 @@
+@import "../../styles/variables.scss";
+
+.pricePlansContainer {
+  padding: 2em;
+  padding-bottom: 4em;
+  padding-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  color: $white;
+  -webkit-text-stroke: 1px $silver;
+}
+
+.paySwitchContainer {
+  margin-top: 2em;
+}
+
+.planSummariesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.showFullLinkAndIconContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.showFullTableLink {
+  color: $dark-turquoise;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.lookupIcon {
+  margin-left: 0.5em;
+  display: inline-block;
+}
+
+@media (min-width: 350px) {
+  .showFullTableLink {
+    font-size: 0.9rem;
+  }
+}  
+
+
+@media (min-width: 450px) {
+  .title {
+    -webkit-text-stroke: 0px;
+  }
+}
+
+@media (min-width: 480px) {
+  .paySwitchContainer {
+    margin-top: 2.5em;
+  }
+}
+
+@media (min-width: 530px) {
+  .paySwitchContainer {
+    margin-top: 3.5em;
+  }
+}
+
+@media (min-width: 580px) {
+  .paySwitchContainer {
+    margin-top: 4em;
+  }
+}
+
+@media (min-width: 640px) {
+  .paySwitchContainer {
+    margin-top: 4.5em;
+  }
+}
+
+@media (min-width: 680px) {
+  .paySwitchContainer {
+    margin-top: 2em;
+  }
+
+  .planSummariesContainer {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,130 @@
+@import "../../styles/variables.scss";
+
+
+@mixin planSummaryContainerThemed($theme: 'colored') {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.5);
+
+  @if $theme == 'colored' {
+    color: $white;
+    background-color: $dark-turquoise;
+  } @else {
+    color: $davys-gray;
+    background-color: $white;
+  }
+}
+
+.planSummaryContainerWhite {
+  @include planSummaryContainerThemed($theme: 'white')
+}
+
+.planSummaryContainerColored {
+  @include planSummaryContainerThemed($theme: 'colored')
+}
+
+@mixin itemContainerThemed($theme: 'colored') {
+  padding: 1.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  text-align: center;
+
+  @if $theme == 'colored' {
+    border-bottom: 2px solid $maximum-blue-green;
+  } @else {
+    border-bottom: 2px solid $platinum;
+  }
+}
+
+.itemContainerWhite {
+  @include itemContainerThemed($theme: 'white')
+}
+
+.itemContainerColored {
+  @include itemContainerThemed($theme: 'colored')
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.priceBottomText {
+  font-weight: 300;
+}
+
+.planName {
+  font-size: 1.1rem;
+}
+
+@mixin priceItemContainer($theme: 'colored') {
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  @if $theme == 'colored' {
+    color: $white;
+    background-color: lighten($dark-turquoise, 10%);
+  } @else {
+    color: $dark-turquoise;
+    background-color: lighten($dark-turquoise, 45%);
+  }
+}
+
+.priceItemContainerWhite {
+  @include priceItemContainer($theme: 'white')
+}
+
+.priceItemContainerColored {
+  @include priceItemContainer($theme: 'colored')
+}
+
+
+.priceItemContainer {
+  background-color: lighten($dark-turquoise, 10%);
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.thin {
+  font-weight: 300;
+}
+
+.buttonContainer {
+  padding: 1em;
+  border-bottom: 0px;
+}
+
+.button {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-weight: bold;
+  text-transform: none;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+
+@mixin buttonBackground($theme: 'colored') {
+  border-radius: 3px;
+
+  @if $theme == 'colored' {
+    background-color: $dark-turquoise;
+  } @else {
+    background-color: $white;
+  }
+}
+
+.buttonBackgroundWhite {
+  @include buttonBackground($theme: 'white')
+}
+
+.buttonBackgroundColored {
+  @include buttonBackground($theme: 'colored')
+}
+
+

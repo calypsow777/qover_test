@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+
+.switchAndLabelsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  color: #A3A3A3;
+  font-size: 0.8rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.track {
+  background-color: #9fc6f8;
+  opacity: 1;
+}
+
+
+@media (min-width: 680px) {
+  .label {
+    color: $white;
+  }
+}

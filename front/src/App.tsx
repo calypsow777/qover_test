@@ -7,15 +7,18 @@ import AppBar from './components/AppBar';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import CarForm from './components/CarForm';
+import PricePlans from './components/PricePlans';
 import SnackbarsManager from './components/SnackbarsManager';
 import styles from './App.module.scss';
 import { RootState } from './store';
 import { verify } from './actions/authActions';
+import { changeCurrentScreen } from './actions/globalActions';
 
 function App() {
   const [waiting, setWaiting] = useState(true);
 
   const currentScreen = useSelector((state: RootState) => state.global.currentScreen);
+  const prices = useSelector((state: RootState) => state.prices.prices);
   const background = currentScreen === 'pricePlans' ? styles.pricePlansScreenBg : styles.loginScreenBg;
   const imgBackground = currentScreen === 'carForm' ? styles.carFormScreenImgBg : {};
 
@@ -36,6 +39,10 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    if (prices) changeCurrentScreen('pricePlans');
+  }, [prices]);
+
   function renderContent() {
     if (waiting) {
       return (
@@ -54,6 +61,12 @@ function App() {
     if (currentScreen === 'carForm') {
       return (
         <CarForm />
+      );
+    }
+
+    if (currentScreen === 'pricePlans') {
+      return (
+        <PricePlans prices={prices!} />
       );
     }
 

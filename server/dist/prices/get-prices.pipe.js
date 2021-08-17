@@ -16,6 +16,7 @@ const prices_service_1 = require("./prices.service");
 const CustomError_1 = require("../common/errors/CustomError");
 const CustomHttpException_1 = require("../common/errors/CustomHttpException");
 const dtos_1 = require("./dtos");
+const utils_1 = require("../common/utils");
 let GetPricesPipe = class GetPricesPipe {
     constructor(pricesService) {
         this.pricesService = pricesService;
@@ -31,18 +32,8 @@ let GetPricesPipe = class GetPricesPipe {
         }), {
             stopAtFirstError: true,
         });
-        if (errors.length > 0) {
-            const resErrors = [];
-            for (const error of errors) {
-                const contexts = error.contexts;
-                for (const contextKey in contexts) {
-                    resErrors.push(contexts[contextKey].customError);
-                }
-            }
-            throw new CustomHttpException_1.CustomHttpException({
-                customErrors: resErrors,
-            });
-        }
+        if (errors.length > 0)
+            utils_1.throwExceptionFromValidationErrors(errors);
         if (numDriverAge < 25 && carMake === 'Porsche') {
             throw new CustomHttpException_1.CustomHttpException({
                 customErrors: [

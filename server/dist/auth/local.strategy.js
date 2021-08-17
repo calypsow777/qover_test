@@ -12,17 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocalStrategy = void 0;
 const passport_local_1 = require("passport-local");
 const passport_1 = require("@nestjs/passport");
+const class_validator_1 = require("class-validator");
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const CustomHttpException_1 = require("../common/errors/CustomHttpException");
 const CustomError_1 = require("../common/errors/CustomError");
+const dtos_1 = require("./dtos");
+const utils_1 = require("../common/utils");
 let LocalStrategy = class LocalStrategy extends passport_1.PassportStrategy(passport_local_1.Strategy) {
     constructor(authService) {
         super({ usernameField: 'email' });
         this.authService = authService;
     }
     async validate(email, password) {
-        const { user, pwdIsWrong } = await this.authService.validateUser(email, password);
+        const loginDto = new dtos_1.LoginDto();
+        loginDto.email = email;
+        loginDto.password = password;
+        const errors = await class_validator_1.validate(loginDto, {
+            stopAtFirstError: true,
+        });
+        if (errors.length > 0)
+            utils_1.throwExceptionFromValidationErrors(errors);
+        const { user, pwdIsWrong } = await this.authService.validateUser(email.toLowerCase(), password);
         if (!user) {
             throw new CustomHttpException_1.CustomHttpException({
                 customErrors: [

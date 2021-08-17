@@ -2,6 +2,7 @@ import produce from 'immer';
 
 interface ActionParam {
   type: string,
+  screen?: string,
 }
 
 interface State {
@@ -36,6 +37,12 @@ export function global(state: State = {
     case 'TOKEN_NOT_VERIFIED': {
       return produce(state, (draft) => {
         draft.currentScreen = 'login';
+      });
+    }
+
+    case 'CHANGE_CURRENT_SCREEN': {
+      return produce(state, (draft) => {
+        draft.currentScreen = action.screen!;
       });
     }
 

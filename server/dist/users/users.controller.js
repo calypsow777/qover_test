@@ -18,6 +18,7 @@ const users_service_1 = require("../users/users.service");
 const dtos_1 = require("./dtos");
 const users_exceptions_filter_1 = require("./users-exceptions.filter");
 const public_route_decorator_1 = require("../common/decorators/public-route.decorator");
+const signup_pipe_1 = require("./signup.pipe");
 let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
@@ -30,10 +31,11 @@ let UsersController = class UsersController {
 };
 __decorate([
     public_route_decorator_1.Public(),
+    common_1.UsePipes(signup_pipe_1.SignupPipe),
     common_1.Post('user'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dtos_1.SignupUserDto]),
+    __metadata("design:paramtypes", [dtos_1.SignupDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "signupUser", null);
 UsersController = __decorate([

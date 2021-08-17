@@ -1,8 +1,7 @@
 import { IsString, IsEmail } from 'class-validator';
 
 import { CustomError } from 'src/common/errors/CustomError';
-
-export class SignupUserDto {
+export class SignupDto {
   @IsEmail(
     {},
     {

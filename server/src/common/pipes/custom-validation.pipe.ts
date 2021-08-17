@@ -1,8 +1,7 @@
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { CustomError } from '../errors/CustomError';
-import { CustomHttpException } from '../errors/CustomHttpException';
+import { throwExceptionFromValidationErrors } from '../../common/utils';
 
 @Injectable()
 export class CustomValidationPipe implements PipeTransform<any> {
@@ -14,18 +13,8 @@ export class CustomValidationPipe implements PipeTransform<any> {
     const object = plainToClass(metatype, value);
     const errors = await validate(object, { stopAtFirstError: true });
 
-    if (errors.length > 0) {
-      const resErrors: CustomError[] = [];
-      for (const error of errors) {
-        const contexts = error.contexts;
-        for (const contextKey in contexts) {
-          resErrors.push(contexts[contextKey].customError);
-        }
-      }
-      throw new CustomHttpException({
-        customErrors: resErrors,
-      });
-    }
+    if (errors.length > 0) throwExceptionFromValidationErrors(errors);
+
     return value;
   }
 
