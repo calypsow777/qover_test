@@ -13,4 +13,5 @@
  2. Run `npm i` in another console.
  3. Run `npm run start`.
  4. The React app should open in your browser at port **3000**.
- 5. Please use Chrome or Firefox to test it, the app has not been tested on Safari.
+ 5. You can log in using the email **Qover** and the password **Ninja**.
+ 6. Please use Chrome or Firefox to test it, the app has not been tested on Safari.
