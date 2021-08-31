@@ -1,18 +1,12 @@
 import * as service from '../services/pricesService';
-import { ActionCallbacks } from './interfaces';
 import store from '../store';
 import { CustomHttpError } from '../common/CustomHttpError';
 
 interface GetPricesParams {
   fields: service.GetPricesParams,
-  callbacks?: ActionCallbacks,
 }
 
-interface GetCarMakesParams {
-  callbacks?: ActionCallbacks,
-}
-
-export async function getPrices({ fields, callbacks }: GetPricesParams) {
+export async function getPrices({ fields }: GetPricesParams): Promise<string> {
   try {
     const prices = await service.getPrices(fields);
 
@@ -21,17 +15,15 @@ export async function getPrices({ fields, callbacks }: GetPricesParams) {
       prices,
     });
 
-    callbacks?.onSuccess?.('Prices successfully fetched.');
+    return 'Prices successfully fetched.';
   } catch (error) {
     const e = <CustomHttpError>error;
     e.defaultMsg = 'Error while trying to fetch the prices.';
-    callbacks?.onError?.(e);
-  } finally {
-    callbacks?.onFinish?.();
+    throw e;
   }
 }
 
-export async function getCarMakes({ callbacks } : GetCarMakesParams) {
+export async function getCarMakes(): Promise<string> {
   try {
     const carMakes = await service.getCarMakes();
 
@@ -40,12 +32,10 @@ export async function getCarMakes({ callbacks } : GetCarMakesParams) {
       carMakes,
     });
 
-    callbacks?.onSuccess?.('Car makes successfully fetched.');
+    return 'Car makes successfully fetched.';
   } catch (error) {
     const e = <CustomHttpError>error;
     e.defaultMsg = 'Error while trying to fetch the car makes.';
-    callbacks?.onError?.(e);
-  } finally {
-    callbacks?.onFinish?.();
+    throw e;
   }
 }

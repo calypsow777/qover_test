@@ -68,11 +68,7 @@ function LoginForm() {
     setWaiting(true);
     login({
       fields: { email, password, rememberMe },
-      callbacks: {
-        onFinish: handleOnSignInFinish,
-        onError: handleOnSignInError,
-      },
-    });
+    }).catch(handleOnSignInError).finally(handleOnSignInFinish);
   }
 
   function _handleOnForgotPwdClick() {

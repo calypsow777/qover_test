@@ -45,11 +45,7 @@ function CarForm() {
   }
 
   useEffect(() => {
-    getCarMakes({
-      callbacks: {
-        onFinish: handleOnFetchCarMakesFinish,
-      },
-    });
+    getCarMakes().finally(handleOnFetchCarMakesFinish);
   }, []);
 
   useEffect(() => {
@@ -130,11 +126,7 @@ function CarForm() {
             carMake,
             purchasePrice: numPurchasePrice,
           },
-          callbacks: {
-            onError: handleOnGetPricesError,
-            onFinish: handleOnGetPricesFinish,
-          },
-        });
+        }).catch(handleOnGetPricesError).finally(handleOnGetPricesFinish);
       }
     }
 

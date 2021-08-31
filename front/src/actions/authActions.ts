@@ -1,22 +1,12 @@
 import * as service from '../services/authService';
-import { ActionCallbacks } from './interfaces';
 import store from '../store';
 import { CustomHttpError } from '../common/CustomHttpError';
 
 interface LoginParams {
   fields: service.LoginParams,
-  callbacks?: ActionCallbacks,
 }
 
-interface LogoutParams {
-  callbacks?: ActionCallbacks,
-}
-
-interface VerifyParams {
-  callbacks?: ActionCallbacks,
-}
-
-export async function login({ fields, callbacks }: LoginParams) {
+export async function login({ fields }: LoginParams): Promise<string> {
   try {
     const { user, accessToken } = await service.login(fields);
 
@@ -26,25 +16,23 @@ export async function login({ fields, callbacks }: LoginParams) {
       accessToken,
     });
 
-    callbacks?.onSuccess?.('You successfully logged in.');
+    return 'You successfully logged in.';
   } catch (error) {
     const e = <CustomHttpError>error;
     e.defaultMsg = 'Error while trying to log you in.';
-    callbacks?.onError?.(e);
-  } finally {
-    callbacks?.onFinish?.();
+    throw e;
   }
 }
 
-export async function logout({ callbacks }: LogoutParams = {}) {
+export async function logout(): Promise<string> {
   store.dispatch({
     type: 'USER_LOGGED_OUT',
   });
 
-  callbacks?.onSuccess?.('You successfully logged out.');
+  return 'You successfully logged out.';
 }
 
-export async function verify({ callbacks }: VerifyParams) {
+export async function verify(): Promise<string> {
   try {
     const user = await service.verify();
 
@@ -53,7 +41,7 @@ export async function verify({ callbacks }: VerifyParams) {
       user,
     });
 
-    callbacks?.onSuccess?.('Access token successfully verified.');
+    return 'Access token successfully verified.';
   } catch (error) {
     store.dispatch({
       type: 'TOKEN_NOT_VERIFIED',
@@ -61,8 +49,6 @@ export async function verify({ callbacks }: VerifyParams) {
 
     const e = <CustomHttpError>error;
     e.defaultMsg = 'Error while trying to verify the access token.';
-    callbacks?.onError?.(e);
-  } finally {
-    callbacks?.onFinish?.();
+    throw e;
   }
 }

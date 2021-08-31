@@ -31,12 +31,7 @@ function App() {
   }
 
   useEffect(() => {
-    verify({
-      callbacks: {
-        onSuccess: handleOnVerifySuccess,
-        onError: handleOnVerifyError,
-      },
-    });
+    verify().then(handleOnVerifySuccess).catch(handleOnVerifyError);
   }, []);
 
   useEffect(() => {
